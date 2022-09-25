@@ -6,9 +6,22 @@
 #include <stdlib.h>
 #include <string.h>
 
+static const int CONSOLE_COLOR_COUNT = 8;
+static const char *CONSOLE_COLORS[CONSOLE_COLOR_COUNT] = {
+	"1;30",
+	"1;31",
+	"1;32",
+	"1;33",
+	"1;34",
+	"0;37",
+	"1;37",
+	"1;41"
+};
+
 struct Game
 {
-	int hot_reload_count = 0;
+	int hot_reload_count;
+	bool did_hot_reload;
 };
 
 bool
@@ -34,7 +47,11 @@ bool
 _update(Application *app)
 {
 	Game *self = (Game *)app->data;
-	printf("Hot reloading %d.\n", self->hot_reload_count);
+	if (self->did_hot_reload)
+	{
+		::printf("\033[%smHot reloading %d.\n\033[0m", CONSOLE_COLORS[rand() % CONSOLE_COLOR_COUNT], self->hot_reload_count);
+		self->did_hot_reload = false;
+	}
 	return true;
 }
 
@@ -80,6 +97,7 @@ platform_api(void *old_api, PLATFORM_API_STATE state)
 			printf("-----------------HOT RELOADING-----------------\n");
 			Game *self = (Game *)app->data;
 			self->hot_reload_count++;
+			self->did_hot_reload = true;
 
 			return app;
 		}
