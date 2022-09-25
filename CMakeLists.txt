@@ -11,20 +11,20 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/$<CONFIG>")
 
 # Global compile definitions.
 add_compile_definitions(
-    $<$<PLATFORM_ID:Windows>:PLATFORM_WIN32=1>
     $<$<PLATFORM_ID:Linux>:PLATFORM_LINUX=1>
+    $<$<PLATFORM_ID:Windows>:PLATFORM_WIN32=1>
 )
 
 # Global compile options.
 if(MSVC)
     set(GLOBAL_COMPILE_OPTIONS -W4 -WX -std:c++17)
 else()
-    set(GLOBAL_COMPILE_OPTIONS -Wall -Wextra -pedantic -Werror)
+    set(GLOBAL_COMPILE_OPTIONS -Wall -Wextra -pedantic -Werror -std=c++17)
 endif()
 
-# This custom command's job is to configure cmake each time we compile, this is only useful for hot-reloading feature.
+# This custom target's job is to configure cmake each time we compile, this is only useful for hot-reloading feature.
 message(STATUS "Hot reloading is enabled.")
-add_custom_target(hot-reload ALL
+add_custom_target(hot_reload ALL
     COMMAND cd .. && cmake -B build
 )
 
