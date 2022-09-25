@@ -5,8 +5,9 @@
 
 # **Hot reloading with CMake**
 
-#### An example that demonstrates how to implement hot reloading for a game engine and integrate it with `CMake`.
-#### The code example provided compiles and runs on both `Linux` and `Windows`.
+##### An example that demonstrates how to implement hot reloading for a game engine and integrate it with `CMake`.
+##### The code example provided compiles and runs on both `Linux` and `Windows`.
+[hot_reloading_with_cmake.webm](https://user-images.githubusercontent.com/6799254/192156217-d6ae8a05-b6f5-48d3-aa7c-eaaa21dd1c3e.webm)
 
 ## **The basic idea behind it:**
 The engine neeeds to be built as a `dll`.
