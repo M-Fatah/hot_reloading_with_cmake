@@ -1,0 +1,7 @@
+# Build folder.
+build
+.vscode/
+**/export.h
+
+.idea/
+cmake-build-debug-visual-studio/

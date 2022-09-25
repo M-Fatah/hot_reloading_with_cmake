@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - '**.md'
+
+  pull_request:
+    branches: [master]
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        build-variant: [Debug, Release]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+
+      - name: Configuring
+        run: cmake -B build -DCMAKE_BUILD_TYPE=${{matrix.build-variant}}
+
+      - name: Building
+        run: cmake --build build --clean-first --config ${{matrix.build-variant}} -j
+
+      - name: Running tests
+        run: build/bin/${{matrix.build-variant}}/unittest
