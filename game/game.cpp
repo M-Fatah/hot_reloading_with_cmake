@@ -31,7 +31,7 @@ _init(Application *app)
 	::memset((void *)self, 0, sizeof(Game));
 	if (self == nullptr)
 		return false;
-
+	self->did_hot_reload = true;
 	app->data = self;
 	return true;
 }
