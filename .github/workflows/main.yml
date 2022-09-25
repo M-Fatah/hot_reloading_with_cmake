@@ -30,6 +30,3 @@ jobs:
 
       - name: Building
         run: cmake --build build --clean-first --config ${{matrix.build-variant}} -j
-
-      - name: Running tests
-        run: build/bin/${{matrix.build-variant}}/unittest
