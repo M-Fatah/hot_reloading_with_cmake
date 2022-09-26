@@ -4,7 +4,7 @@ project(hot_reloading_with_cmake)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-set(CMAKE_PDB_OUTPUT_DIRECTORY     "${CMAKE_BINARY_DIR}/bin/"         )
+set(CMAKE_PDB_OUTPUT_DIRECTORY     "${CMAKE_BINARY_DIR}/bin/$<CONFIG>")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/$<CONFIG>")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/$<CONFIG>")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/$<CONFIG>")
@@ -23,7 +23,6 @@ else()
 endif()
 
 # This custom target's job is to configure cmake each time we compile, this is only useful for hot-reloading feature.
-message(STATUS "Hot reloading is enabled.")
 add_custom_target(hot_reload ALL
     COMMAND cd .. && cmake -B build
 )
